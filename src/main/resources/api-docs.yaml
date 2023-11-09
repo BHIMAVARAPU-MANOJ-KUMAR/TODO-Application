@@ -1,0 +1,93 @@
+openapi: 3.0.1
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+- url: http://localhost:8090
+  description: Generated server url
+paths:
+  /api/todos/{todotaskid}:
+    put:
+      tags:
+      - to-do-controller
+      operationId: updateTodoTask
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ToDo'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ToDo'
+    delete:
+      tags:
+      - to-do-controller
+      operationId: deleteToDoTask
+      parameters: []
+      responses:
+        "200":
+          description: OK
+  /api/todos/createtask:
+    post:
+      tags:
+      - to-do-controller
+      operationId: createToDoTask
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ToDo'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ToDo'
+  /api/todos/multitasks:
+    get:
+      tags:
+      - to-do-controller
+      operationId: getAllToDos
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ToDo'
+components:
+  schemas:
+    ToDo:
+      required:
+      - description
+      - id
+      - title
+      - work_status
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        title:
+          maxLength: 50
+          minLength: 5
+          type: string
+        description:
+          maxLength: 500
+          minLength: 15
+          type: string
+        date:
+          type: string
+          format: date-time
+        work_status:
+          type: string

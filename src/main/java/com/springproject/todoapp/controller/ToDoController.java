@@ -23,13 +23,13 @@ public class ToDoController {
         return toDoService.createToDoTask(toDo);
     }
 
-    @PutMapping("/{todotaskid}")
-    public ToDo updateTodoTask(@PathVariable(name = "id") Long id, @RequestBody ToDo toDo){
+    @PutMapping("/todotask/{id}")
+    public ToDo updateTodoTask(@PathVariable(value = "id", name = "id") Long id, @RequestBody ToDo toDo){
         return toDoService.updateToDoTaskById(toDo, id);
     }
 
-    @DeleteMapping("/{todotaskid}")
-    public void deleteToDoTask(@PathVariable(name = "id") Long id){
+    @DeleteMapping("/todotask/{id}")
+    public void deleteToDoTask(@PathVariable(value = "id", name = "id") Long id){
         toDoService.deleteToDoTaskById(id);
     }
 }
